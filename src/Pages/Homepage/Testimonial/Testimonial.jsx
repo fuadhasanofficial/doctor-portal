@@ -37,7 +37,7 @@ const Testimonial = () => {
       <h2 className="ml-4 text-2xl">What Our Patients Says</h2>
       <div className="grid lg:grid-cols-3 gap-2">
         {reviews.map((review) => (
-          <Review key={review.id} data={review}></Review>
+          <Review key={review._id} data={review}></Review>
         ))}
       </div>
     </section>

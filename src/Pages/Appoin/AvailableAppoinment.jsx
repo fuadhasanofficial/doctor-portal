@@ -3,17 +3,17 @@ import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import AppoinmentsOption from "./AppoinmentsOption";
 import BookingModal from "./BookingModal/BookingModal";
+import { useQuery } from "react-query";
 
 const AvailableAppoinment = ({ selectedDate }) => {
   const [treatment, setTreatment] = useState(null);
-  const [apponments, setApponments] = useState([]);
-  const { a, b } = { x: 2, y: 3 };
-  console.log(b);
-  useEffect(() => {
-    fetch("data.json")
-      .then((res) => res.json())
-      .then((data) => setApponments(data));
-  }, []);
+  // const [apponments, setApponments] = useState([]);
+  const { data: apponments = [], isLoading } = useQuery({
+    queryKey: "apponments",
+    queryFn: () =>
+      fetch("http://localhost:5000/services").then((res) => res.json()),
+  });
+
   return (
     <div className="text-secondary">
       <h2>Available Services on {format(selectedDate, "PP")}</h2>
